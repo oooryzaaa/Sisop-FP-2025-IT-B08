@@ -18,10 +18,10 @@
 
 Nama | NRP
 --- | ---
-... | 5027241xxx
-... | 5027241xxx
-... | 5027241xxx
-... | 5027241xxx
+Ahmad Ibnu Athaillah | 5027241024
+Oryza Qiara Ramadhani | 5027241084
+Putri Joselina Silitonga | 5027241116
+Ananda Fitri Wibowo | 5027241057
 
 ## Deskripsi Soal
 
