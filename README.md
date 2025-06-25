@@ -38,15 +38,31 @@ Struktur repository:
 
 ## Pengerjaan
 
-> Insert poin soal...
-**Teori**
-
+> Virtual Filesystem dengan FUSE
+*Teori*
+Filesystem in Userspace (FUSE) adalah arsitektur yang memungkinkan pengguna membuat virtual filesystem tanpa perlu menulis modul kernel. Arsitektur ini menggunakan:
+- Kernel module: menerima permintaan sistem file melalui VFS.
+- Daemon userspace: menangani callback seperti getattr, readdir, open, dan read.
+Menurut Maheswari et al. (2022), FUSE menawarkan fleksibilitas tinggi dan kemudahan pengembangan karena writer bebas menggunakan library user-space yang kaya.
 ...
 
-**Solusi**
+*Solusi*
+Implementasi struck fuse operations
 
+static struct fuse_operations operations = {
+    .getattr = char_counter_getattr,
+    .readdir = char_counter_readdir,
+    .open    = char_counter_open,
+    .read    = char_counter_read,
+    .release = char_counter_release,
+};
+
+Eksekusi loop utama FUSE
+
+return fuse_main(argc - 1, fuse_argv, &operations, NULL);
+
+Solusi di atas sesuai dengan model arsitektur FUSE, dimana kernel menerima syscall, lalu diteruskan via FUSE ke fungsi di userspace, yang kemudian merespons kembali ke aplikasi.
 ...
-
 > 
 FUSE (Filesystem in Userspace) adalah antar muka yang memungkinkan pengguna membuat filesystem kustom yang dijalankan di ruang pengguna (user space) tanpa harus mengubah kernel. Dalam soal ini, FUSE digunakan untuk intercept proses pembukaan file teks dan menghitung jumlah karakter yang ada.
 
