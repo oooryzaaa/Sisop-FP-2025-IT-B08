@@ -25,8 +25,8 @@ Ananda Fitri Wibowo | 5027241057
 
 ## Deskripsi Soal
 
-> Insert testcase... (contoh dibawah) // hapus line ini
-Memahami race condition pada operasi check-then-act. Program membuat 2 thread; tiap thread mencoba mengambil satu-satunya sumber daya yang tersedia dari variabel global stok (nilai awal 1). Jika tanpa mutex, kedua thread bisa lolos pengecekan dan sama-sama mengambil sumber daya, menghasilkan nilai akhir stok menjadi -1.
+> 22. FUSE - Count characters
+Buatlah sebuah program FUSE yang dapat mount sebuah directory. Saat sebuah file text di directory tersebut dibuka, maka setiap karakter yang ada di dalam file text tersebut akan dihitung jumlahnya dan dicatat di dalam sebuah file log bernama count.log. Sertakan juga tanggal dan waktu untuk tiap log (format bebas, asalkan masih bisa dibaca).
 
 ### Catatan
 
