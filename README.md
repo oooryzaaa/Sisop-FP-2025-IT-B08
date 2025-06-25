@@ -25,7 +25,7 @@ Ananda Fitri Wibowo | 5027241057
 
 ## Deskripsi Soal
 
-## 22. FUSE - Count characters
+22. FUSE - Count characters
 Buatlah sebuah program FUSE yang dapat mount sebuah directory. Saat sebuah file text di directory tersebut dibuka, maka setiap karakter yang ada di dalam file text tersebut akan dihitung jumlahnya dan dicatat di dalam sebuah file log bernama count.log. Sertakan juga tanggal dan waktu untuk tiap log (format bebas, asalkan masih bisa dibaca).
 
 ### Catatan
