@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
+#include <sys/file.h>
 
 #define MAX_CHAR 256
 
@@ -80,6 +81,8 @@ void log_character_count(const char *filename, struct CharStats *stats) {
         perror("fopen log");
         return;
     }
+    int fd = fileno(log);
+    flock(fd, LOCK_EX);
 
     fprintf(log, "\n=====================================\n");
     fprintf(log, "🎯 FUSE CHARACTER COUNTER LOG ENTRY 🎯\n");
@@ -113,6 +116,7 @@ void log_character_count(const char *filename, struct CharStats *stats) {
     }
 
     fprintf(log, "=====================================\n");
+    flock(fd, LOCK_UN);
     fclose(log);
 }
 
@@ -223,7 +227,10 @@ int main(int argc, char *argv[]) {
 
     FILE *log = fopen(log_file_path, "a");
     if (log) {
+        int fd = fileno(log);
+        flock(fd, LOCK_EX);
         fprintf(log, "\n🎉 FUSE Character Counter Started %s\n", get_current_timestamp());
+        flock(fd, LOCK_UN);
         fclose(log);
     }
 
