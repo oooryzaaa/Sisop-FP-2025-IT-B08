@@ -61,6 +61,6 @@ Struktur repository:
 
 ## Daftar Pustaka
 
-Sitasi 1
-Sitasi 2
-Sitasi 3
+Singh, A. (2014). Writing a Simple Filesystem Using FUSE in C. Retrieved from https://www.cs.nmsu.edu/~pfeiffer/classes/474/notes/FUSE/Fuse-tutorial.pdf
+libfuse Project. (2021). FUSE: Filesystem in Userspace - Struct fuse_operations Documentation. Retrieved from https://libfuse.github.io/doxygen/structfuse__operations.html
+Szeredi, M. (2007). Writing a FUSE Filesystem: a Tutorial. Retrieved from https://github.com/libfuse/libfuse/wiki/Writing-Your-Own-Filesystem
