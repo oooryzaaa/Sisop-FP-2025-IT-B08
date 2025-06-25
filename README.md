@@ -80,7 +80,7 @@ return fuse_main(argc - 1, fuse_argv, &operations, NULL);
 3. **Akses file teks di mount point, cek log di `<source_dir>/count.log`.**
 
 ### Video Menjalankan Program
-[Demo Video (dummy link)](https://youtu.be/dummy-link)
+https://youtu.be/QO_eCs4tIE0
 
 ---
 
