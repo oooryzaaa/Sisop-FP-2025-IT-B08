@@ -47,8 +47,8 @@ Struktur repository:
 
 ...
 
-> Insert poin soal (FUSE)
-FUSE (Filesystem in Userspace) adalah antarmuka yang memungkinkan pengguna membuat filesystem kustom yang dijalankan di ruang pengguna (user space) tanpa harus mengubah kernel. Dalam soal ini, FUSE digunakan untuk intercept proses pembukaan file teks dan menghitung jumlah karakter yang ada.
+> 
+FUSE (Filesystem in Userspace) adalah antar muka yang memungkinkan pengguna membuat filesystem kustom yang dijalankan di ruang pengguna (user space) tanpa harus mengubah kernel. Dalam soal ini, FUSE digunakan untuk intercept proses pembukaan file teks dan menghitung jumlah karakter yang ada.
 
 ...
 
