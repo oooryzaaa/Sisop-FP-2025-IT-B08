@@ -157,18 +157,15 @@ static int char_counter_open(const char *path, struct fuse_file_info *fi) {
     if (is_text_file(full_path)) {
         FILE *f = fopen(full_path, "rb");
         if (f) {
-            fseek(f, 0, SEEK_END);
-            long size = ftell(f);
-            rewind(f);
-            char *buffer = malloc(size + 1);
-            if (buffer) {
-                fread(buffer, 1, size, f);
-                buffer[size] = '\0';
-                struct CharStats stats;
-                count_characters(buffer, size, &stats);
-                log_character_count(full_path, &stats);
-                free(buffer);
+            struct CharStats stats;
+            memset(&stats, 0, sizeof(struct CharStats));
+            const size_t bufsize = 4096;
+            char buffer[bufsize];
+            size_t nread;
+            while ((nread = fread(buffer, 1, bufsize, f)) > 0) {
+                count_characters(buffer, nread, &stats);
             }
+            log_character_count(full_path, &stats);
             fclose(f);
         }
     }
