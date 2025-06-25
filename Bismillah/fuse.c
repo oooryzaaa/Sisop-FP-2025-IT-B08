@@ -85,7 +85,7 @@ void log_character_count(const char *filename, struct CharStats *stats) {
     flock(fd, LOCK_EX);
 
     fprintf(log, "\n=====================================\n");
-    fprintf(log, " FUSE CHARACTER COUNTER LOG ENTRY 🎯\n");
+    fprintf(log, " FUSE CHARACTER COUNTER LOG ENTRY \n");
     fprintf(log, "=====================================\n");
     fprintf(log, " Timestamp: %s\n", get_current_timestamp());
     fprintf(log, " File: %s\n", filename);
