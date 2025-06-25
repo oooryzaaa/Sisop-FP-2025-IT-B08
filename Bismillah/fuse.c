@@ -85,17 +85,17 @@ void log_character_count(const char *filename, struct CharStats *stats) {
     flock(fd, LOCK_EX);
 
     fprintf(log, "\n=====================================\n");
-    fprintf(log, "🎯 FUSE CHARACTER COUNTER LOG ENTRY 🎯\n");
+    fprintf(log, " FUSE CHARACTER COUNTER LOG ENTRY 🎯\n");
     fprintf(log, "=====================================\n");
-    fprintf(log, "⏰ Timestamp: %s\n", get_current_timestamp());
-    fprintf(log, "📁 File: %s\n", filename);
-    fprintf(log, "📊 CHARACTER STATISTICS:\n");
+    fprintf(log, " Timestamp: %s\n", get_current_timestamp());
+    fprintf(log, " File: %s\n", filename);
+    fprintf(log, " CHARACTER STATISTICS:\n");
     fprintf(log, "   • Total Characters: %d\n", stats->total_chars);
     fprintf(log, "   • Letters: %d\n", stats->letters);
     fprintf(log, "   • Digits: %d\n", stats->digits);
     fprintf(log, "   • Spaces: %d\n", stats->spaces);
     fprintf(log, "   • Special Characters: %d\n", stats->special_chars);
-    fprintf(log, "🔥 TOP 5 MOST FREQUENT CHARACTERS:\n");
+    fprintf(log, " TOP 5 MOST FREQUENT CHARACTERS:\n");
 
     int freq_table[MAX_CHAR][2];
     for (int i = 0; i < MAX_CHAR; ++i) {
@@ -197,11 +197,11 @@ static struct fuse_operations operations = {
 };
 
 int main(int argc, char *argv[]) {
-    printf("🚀 FUSE Character Counter 🚀\n");
+    printf(" FUSE Character Counter \n");
     printf("===========================\n");
 
     if (argc < 3) {
-        fprintf(stderr, "❌ Usage: %s <source_dir> <mount_point>\n", argv[0]);
+        fprintf(stderr, " Usage: %s <source_dir> <mount_point>\n", argv[0]);
         return 1;
     }
 
@@ -220,15 +220,15 @@ int main(int argc, char *argv[]) {
     }
     snprintf(log_file_path, path_len, "%s/count.log", source_dir);
 
-    printf("📁 Source Directory: %s\n", source_dir);
-    printf("🗂  Mount Point     : %s\n", argv[2]);
-    printf("📝 Log File         : %s\n", log_file_path);
+    printf(" Source Directory: %s\n", source_dir);
+    printf(" Mount Point     : %s\n", argv[2]);
+    printf(" Log File         : %s\n", log_file_path);
 
     FILE *log = fopen(log_file_path, "a");
     if (log) {
         int fd = fileno(log);
         flock(fd, LOCK_EX);
-        fprintf(log, "\n🎉 FUSE Character Counter Started %s\n", get_current_timestamp());
+        fprintf(log, "\n FUSE Character Counter Started %s\n", get_current_timestamp());
         flock(fd, LOCK_UN);
         fclose(log);
     }
