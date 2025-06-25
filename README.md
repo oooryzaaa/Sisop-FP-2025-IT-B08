@@ -3,13 +3,13 @@
 ## Final Project Sistem Operasi 2025
 
 ### Kelompok B08
-| Nama                        | NRP         ||     Github    |
-|-----------------------------|-------------|                |
-| Ahmad Ibnu Athaillah        | 5027241024  |  pocongcyber77 |
-| Oryza Qiara Ramadhani       | 5027241084  |   oryza        |
-| Putri Joselina Silitonga    | 5027241116  |   joselin      |
-| Ananda Fitri Wibowo         | 5027241057  |   anandafitri  |
-|-----------------------------|-------------|----------------|
+| Nama                                  |    NRP      |
+|---------------------------------------|-------------|
+| Ahmad Ibnu Athaillah  (pocongcyber77) | 5027241024  |
+| Oryza Qiara Ramadhani (oryza)         | 5027241084  |
+| Putri Joselina Silitonga (joselin)    | 5027241116  |
+| Ananda Fitri Wibowo  (anandafitri)    | 5027241057  |
+|---------------------------------------|-------------|
 
 
 ---
