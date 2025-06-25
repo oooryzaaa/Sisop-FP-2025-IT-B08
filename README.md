@@ -1,54 +1,61 @@
 # Sisop-FP-2025-IT-B08
 
-# Final Project Sistem Operasi (Sisop-FP-2025-IT-B08)
+## Final Project Sistem Operasi 2025
 
-## Peraturan
-1. Waktu pengerjaan dimulai hari Kamis (19 Juni 2025) setelah soal dibagikan hingga hari Rabu (25 Juni 2025) pukul 23.59 WIB.
-2. Praktikan diharapkan membuat laporan penjelasan dan penyelesaian soal dalam bentuk Readme(github).
-3. Format nama repository github “Sisop-FP-2025-IT-[Kelas][Kelompok]” (contoh:Sisop-FP-2025-IT-A01).
-4. Setelah pengerjaan selesai, seluruh source code dan semua script bash, awk, dan file yang berisi cron job ditaruh di github masing - masing kelompok, dan link github dikumpulkan pada form yang disediakan. Pastikan github di setting ke publik.
-5. Commit terakhir maksimal 10 menit setelah waktu pengerjaan berakhir. Jika melewati maka akan dinilai berdasarkan commit terakhir.
-6. Jika tidak ada pengumuman perubahan soal oleh asisten, maka soal dianggap dapat diselesaikan.
-7. Jika ditemukan soal yang tidak dapat diselesaikan, harap menuliskannya pada Readme beserta permasalahan yang ditemukan.
-8. Praktikan tidak diperbolehkan menanyakan jawaban dari soal yang diberikan kepada asisten maupun praktikan dari kelompok lainnya.
-9. Jika ditemukan indikasi kecurangan dalam bentuk apapun di pengerjaan soal final project, maka nilai dianggap 0.
-10. Pengerjaan soal final project sesuai dengan modul yang telah diajarkan.
+### Kelompok B08
+| Nama                        | NRP         |
+|-----------------------------|-------------|
+| Ahmad Ibnu Athaillah        | 5027241024  |
+| Oryza Qiara Ramadhani       | 5027241084  |
+| Putri Joselina Silitonga    | 5027241116  |
+| Ananda Fitri Wibowo         | 5027241057  |
 
-## Kelompok B08
-
-Nama | NRP
---- | ---
-Ahmad Ibnu Athaillah | 5027241024
-Oryza Qiara Ramadhani | 5027241084
-Putri Joselina Silitonga | 5027241116
-Ananda Fitri Wibowo | 5027241057
+---
 
 ## Deskripsi Soal
+**FUSE - Count characters:**
+Buatlah sebuah program FUSE yang dapat mount sebuah directory. Saat sebuah file text di directory tersebut dibuka, maka setiap karakter yang ada di dalam file text tersebut akan dihitung jumlahnya dan dicatat di dalam sebuah file log bernama `count.log`. Sertakan juga tanggal dan waktu untuk tiap log (format bebas, asalkan masih bisa dibaca).
 
-22. FUSE - Count characters: Buatlah sebuah program FUSE yang dapat mount sebuah directory. Saat sebuah file text di directory tersebut dibuka, maka setiap karakter yang ada di dalam file text tersebut akan dihitung jumlahnya dan dicatat di dalam sebuah file log bernama count.log. Sertakan juga tanggal dan waktu untuk tiap log (format bebas, asalkan masih bisa dibaca).
+---
 
-### Catatan
+## Catatan Pengerjaan
+- Program diimplementasikan menggunakan bahasa C dan library FUSE.
+- Proses pembacaan file dioptimalkan dengan buffered read (per blok, bukan seluruh file sekaligus).
+- Logging menggunakan file locking agar aman dari race condition.
+- Analisis karakter dilakukan langsung dari file descriptor hasil open, tanpa membuka file dua kali.
+- Semua source code, script, dan file terkait diletakkan di repository ini.
+- Jika ada kendala atau soal yang tidak dapat diselesaikan, akan dicatat di bagian ini. (Saat ini: semua soal dapat diselesaikan)
 
-> Insert catatan dari pengerjaan kalian... (contoh dibawah) // hapus line ini
-Struktur repository:
+---
+
+## Struktur Repository
 ```
 .
-..
+├── Bismillah/
+│   └── fuse.c
+├── README.md
+...
 ```
 
-## Pengerjaan
+---
 
-> Virtual Filesystem dengan FUSE
-*Teori*
-Filesystem in Userspace (FUSE) adalah arsitektur yang memungkinkan pengguna membuat virtual filesystem tanpa perlu menulis modul kernel. Arsitektur ini menggunakan:
-- Kernel module: menerima permintaan sistem file melalui VFS.
-- Daemon userspace: menangani callback seperti getattr, readdir, open, dan read.
-Menurut Maheswari et al. (2022), FUSE menawarkan fleksibilitas tinggi dan kemudahan pengembangan karena writer bebas menggunakan library user-space yang kaya.
-...
+## Penjelasan Solusi
+### Teori FUSE
+Filesystem in Userspace (FUSE) adalah arsitektur yang memungkinkan pengguna membuat virtual filesystem tanpa perlu menulis modul kernel. FUSE terdiri dari:
+- **Kernel module:** menerima permintaan sistem file melalui VFS.
+- **Daemon userspace:** menangani callback seperti getattr, readdir, open, dan read.
 
-*Solusi*
-Implementasi struck fuse operations
+Pada program ini, FUSE digunakan untuk intercept proses pembukaan file teks dan menghitung jumlah karakter yang ada.
 
+### Implementasi
+- Fungsi utama FUSE yang digunakan:
+  - `getattr`, `readdir`, `open`, `read`, `release`.
+- Pada fungsi `open`, jika file yang dibuka adalah file teks, maka karakter di dalam file dihitung dan dicatat ke `count.log`.
+- Proses pembacaan file dilakukan secara bertahap (buffered) agar efisien untuk file besar.
+- Logging dilakukan dengan file lock agar tidak terjadi race condition.
+
+### Eksekusi Loop Utama FUSE
+```c
 static struct fuse_operations operations = {
     .getattr = char_counter_getattr,
     .readdir = char_counter_readdir,
@@ -56,28 +63,27 @@ static struct fuse_operations operations = {
     .read    = char_counter_read,
     .release = char_counter_release,
 };
-
-Eksekusi loop utama FUSE
-
 return fuse_main(argc - 1, fuse_argv, &operations, NULL);
+```
 
-Solusi di atas sesuai dengan model arsitektur FUSE, dimana kernel menerima syscall, lalu diteruskan via FUSE ke fungsi di userspace, yang kemudian merespons kembali ke aplikasi.
-...
-> 
-FUSE (Filesystem in Userspace) adalah antar muka yang memungkinkan pengguna membuat filesystem kustom yang dijalankan di ruang pengguna (user space) tanpa harus mengubah kernel. Dalam soal ini, FUSE digunakan untuk intercept proses pembukaan file teks dan menghitung jumlah karakter yang ada.
+### Cara Menjalankan
+1. **Build:**
+   ```bash
+   gcc -Wall Bismillah/fuse.c `pkg-config fuse --cflags --libs` -o fuse_counter
+   ```
+2. **Jalankan:**
+   ```bash
+   ./fuse_counter <source_dir> <mount_point>
+   ```
+3. **Akses file teks di mount point, cek log di `<source_dir>/count.log`.**
 
-...
+### Video Menjalankan Program
+[Demo Video (dummy link)](https://youtu.be/dummy-link)
 
-**Solusi**
-
-...
-
-**Video Menjalankan Program**
-...
+---
 
 ## Daftar Pustaka
-
-#### Singh, A. (2014). Writing a Simple Filesystem Using FUSE in C. Retrieved from https://www.cs.nmsu.edu/~pfeiffer/classes/474/notes/FUSE/Fuse-tutorial.pdf
-#### libfuse Project. (2021). FUSE: Filesystem in Userspace - Struct fuse_operations Documentation. Retrieved from https://libfuse.github.io/doxygen/structfuse__operations.html
-#### Szeredi, M. (2007). Writing a FUSE Filesystem: a Tutorial. Retrieved from https://github.com/libfuse/libfuse/wiki/Writing-Your-Own-Filesystem
-#### https://stackoverflow.com/
+- Singh, A. (2014). Writing a Simple Filesystem Using FUSE in C. [Link](https://www.cs.nmsu.edu/~pfeiffer/classes/474/notes/FUSE/Fuse-tutorial.pdf)
+- libfuse Project. (2021). FUSE: Filesystem in Userspace - Struct fuse_operations Documentation. [Link](https://libfuse.github.io/doxygen/structfuse__operations.html)
+- Szeredi, M. (2007). Writing a FUSE Filesystem: a Tutorial. [Link](https://github.com/libfuse/libfuse/wiki/Writing-Your-Own-Filesystem)
+- Stack Overflow
