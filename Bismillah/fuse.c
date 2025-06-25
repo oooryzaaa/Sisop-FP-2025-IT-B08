@@ -120,6 +120,20 @@ void log_character_count(const char *filename, struct CharStats *stats) {
     fclose(log);
 }
 
+void analyze_and_log_fd(int fd, const char *filename) {
+    struct CharStats stats;
+    memset(&stats, 0, sizeof(struct CharStats));
+    const size_t bufsize = 4096;
+    char buffer[bufsize];
+    ssize_t nread;
+    lseek(fd, 0, SEEK_SET);
+    while ((nread = read(fd, buffer, bufsize)) > 0) {
+        count_characters(buffer, nread, &stats);
+    }
+    log_character_count(filename, &stats);
+    lseek(fd, 0, SEEK_SET);
+}
+
 // FUSE functions
 
 static int char_counter_getattr(const char *path, struct stat *stbuf) {
@@ -155,19 +169,7 @@ static int char_counter_open(const char *path, struct fuse_file_info *fi) {
     fi->fh = fd;
 
     if (is_text_file(full_path)) {
-        FILE *f = fopen(full_path, "rb");
-        if (f) {
-            struct CharStats stats;
-            memset(&stats, 0, sizeof(struct CharStats));
-            const size_t bufsize = 4096;
-            char buffer[bufsize];
-            size_t nread;
-            while ((nread = fread(buffer, 1, bufsize, f)) > 0) {
-                count_characters(buffer, nread, &stats);
-            }
-            log_character_count(full_path, &stats);
-            fclose(f);
-        }
+        analyze_and_log_fd(fd, full_path);
     }
 
     return 0;
