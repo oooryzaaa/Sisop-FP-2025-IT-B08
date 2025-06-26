@@ -90,11 +90,11 @@ https://youtu.be/QO_eCs4tIE0
 1. Ibnu : Revisi kode & Laporan
 2. Oryza : Membuat kode utama
 3. Joselin : Membuat kode utama
-4. Ananda : Laporan
+4. Ananda : Laporan & Sumber Teori
 ---
 
 ## Daftar Pustaka
-- Singh, A. (2014). Writing a Simple Filesystem Using FUSE in C. [Link](https://www.cs.nmsu.edu/~pfeiffer/classes/474/notes/FUSE/Fuse-tutorial.pdf)
-- libfuse Project. (2021). FUSE: Filesystem in Userspace - Struct fuse_operations Documentation. [Link](https://libfuse.github.io/doxygen/structfuse__operations.html)
-- Szeredi, M. (2007). Writing a FUSE Filesystem: a Tutorial. [Link](https://github.com/libfuse/libfuse/wiki/Writing-Your-Own-Filesystem)
+- InfluentCoder. (2021). FUSE: Building Filesystems in Userspace. InfluentCoder. [Link](https://influentcoder.com/posts/fuse/)
+- Kuenning, G. (n.d.). CS135 FUSE Documentation. Harvey Mudd College. [Link](https://www.cs.hmc.edu/~geoff/classes/hmc.cs135.201001/homework/fuse/fuse_doc.html)
+- libfuse Project. (n.d.). fuse_operations Struct Reference. [Link](https://libfuse.github.io/doxygen/structfuse__operations.html)
 - Stack Overflow
