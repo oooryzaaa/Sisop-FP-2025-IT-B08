@@ -78,10 +78,19 @@ return fuse_main(argc - 1, fuse_argv, &operations, NULL);
    ./fuse_counter <source_dir> <mount_point>
    ```
 3. **Akses file teks di mount point, cek log di `<source_dir>/count.log`.**
+4. **Unmount filesystem FUSE**
+   ```
+   fusermount -u <mount_point>
+   ```
 
 ### Video Menjalankan Program
 https://youtu.be/QO_eCs4tIE0
 
+### Pembagian Tugas
+1. Ibnu : Revisi kode & Laporan
+2. Oryza : Membuat kode utama
+3. Joselin : Membuat kode utama
+4. Ananda : Laporan
 ---
 
 ## Daftar Pustaka
